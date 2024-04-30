@@ -1,0 +1,24 @@
+CREATE TABLE CUSTOMER (
+    CustomerID NUMBER PRIMARY KEY,
+    FirstName VARCHAR2(50),
+    LastName VARCHAR2(50),
+    Email VARCHAR2(100) UNIQUE,
+    Phone VARCHAR2(20)
+);
+
+CREATE TABLE PRODUCT (
+    ProductID NUMBER PRIMARY KEY,
+    ProductName VARCHAR2(100),
+    Price NUMBER(10,2),
+    CONSTRAINT CHK_Price CHECK (Price >= 0)
+);
+
+CREATE TABLE ORDERS (
+    OrderID NUMBER PRIMARY KEY,
+    CustomerID NUMBER,
+    ProductID NUMBER,
+    OrderQuantity NUMBER,
+    OrderTotal NUMBER(10,2),
+    CONSTRAINT FK_CustomerID FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID),
+    CONSTRAINT FK_ProductID FOREIGN KEY (ProductID) REFERENCES PRODUCT(ProductID)
+);
